@@ -1,0 +1,21 @@
+# Build artifacts
+build/
+*.dll
+*.so
+*.dylib
+
+# Test files
+test/
+*.test.ts
+
+# Development files
+.vscode/
+.idea/
+.git/
+.gitignore
+*.log
+
+# Zig files (if we keep them for reference)
+build.zig
+zig-out/
+zig-cache/ 

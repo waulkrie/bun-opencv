@@ -1,0 +1,39 @@
+{
+  "name": "@augusdogus/bun-opencv",
+  "version": "0.1.0",
+  "description": "OpenCV bindings for Bun",
+  "module": "src/ts/index.ts",
+  "types": "src/ts/index.ts",
+  "type": "module",
+  "files": [
+    "src/ts",
+    "src/cpp",
+    "dist",
+    "CMakeLists.txt",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "bun test",
+    "build": "cmake --build build --config Release",
+    "build:test": "bun run build && bun test",
+    "publish": "bun scripts/publish.ts"
+  },
+  "keywords": [
+    "opencv",
+    "template-matching",
+    "computer-vision",
+    "image-processing",
+    "bun"
+  ],
+  "author": "AugusDogus",
+  "license": "MIT",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "bun": "^1.1.42"
+  },
+  "engines": {
+    "bun": ">=1.1.42"
+  }
+}

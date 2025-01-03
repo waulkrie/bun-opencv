@@ -1,0 +1,9 @@
+{
+  "name": "opencv-wrapper",
+  "cflags": [
+    "-I${OPENCV_INCLUDE_DIR}",
+    "-L${OPENCV_LIB_DIR}",
+    "-lopencv_world4100d"
+  ],
+  "cpp": true
+}

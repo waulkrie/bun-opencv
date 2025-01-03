@@ -1,0 +1,33 @@
+# Build directories
+build/
+zig-out/
+zig-cache/
+.zig-cache/
+
+# Node/Bun
+node_modules/
+bun.lockb
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# OpenCV binaries
+*.dll
+*.so
+*.dylib
+*.lib
+*.exp
+*.pdb
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
