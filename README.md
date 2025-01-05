@@ -30,15 +30,24 @@ Planned:
 - OpenCV 4.x
 - Bun runtime (>= 1.1.42)
 - CMake
-- MSVC (Visual Studio 2019 or newer)
+- A C++ compiler:
+  - Windows: MSVC (Visual Studio 2019 or newer)
+  - Linux/macOS: GCC or Clang
 - Environment variables:
-  - OPENCV_DIR: Path to OpenCV root (e.g., C:\tools\opencv)
-  - OPENCV_BIN_DIR: Path to OpenCV DLLs (e.g., C:\tools\opencv\build\x64\vc16\bin)
-  - OPENCV_INCLUDE_DIR: Path to OpenCV headers (e.g., C:\tools\opencv\build\include)
-  - OPENCV_LIB_DIR: Path to OpenCV libraries (e.g., C:\tools\opencv\build\x64\vc16\lib)
-  - Add %OPENCV_BIN_DIR% to your PATH
+  - OPENCV_DIR: Path to OpenCV root directory
+  - OPENCV_BIN_DIR: Path to OpenCV shared libraries
+  - OPENCV_INCLUDE_DIR: Path to OpenCV headers
+  - OPENCV_LIB_DIR: Path to OpenCV libraries
+  - Add OPENCV_BIN_DIR to your system's library path:
+    - Windows: Add to PATH
+    - Linux: Add to LD_LIBRARY_PATH
+    - macOS: Add to DYLD_LIBRARY_PATH
 
-Note: Currently only supports Windows. Support for other platforms is planned.
+Example paths:
+
+- Windows: C:\tools\opencv\build
+- Linux: /usr/local/opencv
+- macOS: /usr/local/opt/opencv
 
 ## Installation
 
