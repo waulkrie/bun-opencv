@@ -1,21 +1,18 @@
-import { dlopen, FFIType } from 'bun:ffi';
+import { dlopen, FFIType, suffix } from 'bun:ffi';
 import { join } from 'path';
 import type { CvSize } from './types';
 
 // Get the platform-specific library name
 function getLibraryPath(): string {
   const platform = process.platform;
-  const libName = platform === 'win32' ? 'template_matcher.dll' : 'libtemplate_matcher.so';
+  const prefix = platform === 'win32' ? '' : 'lib';
+  const libName = `${prefix}template_matcher.${suffix}`;
 
-  // Check if we're in development or production
-  const isDev = process.env.NODE_ENV === 'development';
-  const buildDir = isDev
-    ? join(import.meta.dir, '..', '..', 'build', 
-          platform === 'win32' ? 'bin/Release' : 'lib')
-    : join(import.meta.dir, '..', '..', 'build', 'lib');
+  const binDir = platform === 'win32' ? 'bin/Release' : 'lib';
+  const buildDir = join(import.meta.dir, '..', '..', 'build', binDir);
 
-  console.log(buildDir + '/' + libName);
-  return join(buildDir, libName);
+  const libPath = join(buildDir, libName);
+  return libPath;
 }
 
 export const { symbols } = dlopen(getLibraryPath(), {
