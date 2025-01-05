@@ -5,22 +5,17 @@ import type { CvSize } from './types';
 // Get the platform-specific library name
 function getLibraryPath(): string {
   const platform = process.platform;
-
-  // Only support Windows for now
-  if (platform !== 'win32') {
-    throw new Error(
-      'This library currently only supports Windows. ' +
-        'Support for other platforms is planned.'
-    );
-  }
+  const libName = platform === 'win32' ? 'template_matcher.dll' : 'libtemplate_matcher.so';
 
   // Check if we're in development or production
   const isDev = process.env.NODE_ENV === 'development';
   const buildDir = isDev
-    ? join(import.meta.dir, '..', '..', 'build', 'bin', 'Release')
-    : join(import.meta.dir, '..', '..', 'dist', 'bin');
+    ? join(import.meta.dir, '..', '..', 'build', 
+          platform === 'win32' ? 'bin/Release' : 'lib')
+    : join(import.meta.dir, '..', '..', 'build', 'lib');
 
-  return join(buildDir, 'template_matcher.dll');
+  console.log(buildDir + '/' + libName);
+  return join(buildDir, libName);
 }
 
 export const { symbols } = dlopen(getLibraryPath(), {
