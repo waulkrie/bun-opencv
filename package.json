@@ -15,8 +15,7 @@
   "scripts": {
     "test": "bun test",
     "build": "cmake --build build --config Release",
-    "build:test": "bun run build && bun test",
-    "publish": "bun scripts/publish.ts"
+    "build:test": "bun run build && bun test"
   },
   "keywords": [
     "opencv",
