@@ -5,13 +5,25 @@ import { join } from 'path';
 export function getLibraryPath(): string {
   const platform = process.platform;
   const prefix = platform === 'win32' ? '' : 'lib';
-  const libName = `${prefix}template_matcher.${suffix}`;
+  
+  // OpenCV library name differs by platform
+  let libName: string;
+  if (platform === 'win32') {
+    libName = 'opencv_world490.dll';  // Adjust version number as needed
+  } else if (platform === 'darwin') {
+    libName = `${prefix}opencv_world.4.9.0.dylib`;  // Adjust version number as needed
+  } else {
+    libName = `${prefix}opencv_world.so.4.9`;  // Adjust version number as needed
+  }
 
-  const binDir = platform === 'win32' ? 'bin/Release' : 'lib';
-  const buildDir = join(import.meta.dir, '..', '..', 'build', binDir);
-
-  const libPath = join(buildDir, libName);
-  return libPath;
+  // On Unix systems, OpenCV is typically installed in standard library locations
+  if (platform === 'win32') {
+    return join(import.meta.dir, '..', '..', 'build', 'bin', 'Release', libName);
+  } else if (platform === 'darwin') {
+    return join('/usr/local/lib', libName);
+  } else {
+    return join('/usr/lib', libName);
+  }
 }
 
 export const { symbols } = dlopen(getLibraryPath(), {
