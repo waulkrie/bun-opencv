@@ -103,9 +103,9 @@ jobs:
       - name: Prepare package
         run: |
           mkdir -p dist/bin dist/lib
-          cp artifacts/binaries-windows-latest/*.dll dist/bin/ || true
-          cp artifacts/binaries-ubuntu-latest/*.so dist/lib/ || true
-          cp artifacts/binaries-macos-latest-large/*.dylib dist/lib/ || true
+          cp artifacts/binaries-windows-latest/bin/Release/template_matcher.dll dist/bin/ || true
+          cp artifacts/binaries-ubuntu-latest/lib/libtemplate_matcher.so dist/lib/ || true
+          cp artifacts/binaries-macos-latest-large/lib/libtemplate_matcher.dylib dist/lib/ || true
 
       - name: Install dependencies
         run: bun install
