@@ -1,6 +1,6 @@
 {
   "name": "@augusdogus/bun-opencv",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "OpenCV bindings for Bun",
   "module": "src/ts/index.ts",
   "types": "src/ts/index.ts",
