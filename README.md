@@ -8,6 +8,14 @@ OpenCV bindings for Bun. Access the power of OpenCV through a native TypeScript 
 bun add @augusdogus/bun-opencv
 ```
 
+## System Requirements
+
+This package requires OpenCV to be installed on your system as it dynamically links against OpenCV libraries. Install OpenCV using your system's package manager:
+
+- Windows: `choco install opencv`
+- Ubuntu/Debian: `sudo apt-get install libopencv-dev`
+- macOS: `brew install opencv`
+
 ## Usage
 
 ### Template Matching Example
@@ -83,8 +91,6 @@ If you want to build from source:
   - Windows: MSVC (Visual Studio 2019 or newer)
   - Linux: GCC
   - macOS: Clang
-
-The package includes pre-built binaries for Windows, Linux, and macOS, so you typically don't need to build from source.
 
 ### Commands
 
