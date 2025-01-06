@@ -26,7 +26,7 @@ message(STATUS "    version: ${OpenCV_VERSION}")
 message(STATUS "    libraries: ${OpenCV_LIBRARIES}")
 message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 
-add_library(template_matcher SHARED src/cpp/template_matcher.c)
+add_library(template_matcher SHARED src/cpp/template_matcher.cpp)
 target_include_directories(template_matcher PRIVATE ${OpenCV_INCLUDE_DIRS})
 target_link_libraries(template_matcher ${OpenCV_LIBRARIES})
 

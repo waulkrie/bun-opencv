@@ -1,6 +1,7 @@
-#include <opencv2/core_c.h>        // For cv::Mat
-#include <opencv2/imgcodecs_c.h>   // For cv::imread
-#include <opencv2/imgproc_c.h>     // For cv::matchTemplate
+#include <opencv2/core/core_c.h>        // For cv::Mat
+#include <opencv2/imgcodecs/imgcodecs_c.h>   // For cv::imread
+#include <opencv2/imgproc/imgproc_c.h>     // For cv::matchTemplate
+#include <opencv2/imgcodecs/legacy/constants_c.h>
 #include "template_matcher.h"
 #include <string.h>  // for memcpy
 
