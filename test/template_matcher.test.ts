@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { TemplateMatcher } from "./template_matcher";
+import { TemplateMatcher } from "../src/ts/template_matcher";
 import { join } from "path";
 
 describe("TemplateMatcher", () => {

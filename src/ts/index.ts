@@ -1,6 +1,7 @@
 export { Mat } from './mat';
 export * from './types';
-import { Mat, symbols } from './mat';
+export * from './template_matcher';
+import { symbols } from './opencv_direct';
 import {
   LoadImageFlags,
   TemplateMatchModes,

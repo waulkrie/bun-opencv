@@ -26,25 +26,32 @@ export function getLibraryPath(): string {
   }
 }
 
-export const { symbols } = dlopen(getLibraryPath(), {
-  cv_imread: {
-    args: [FFIType.ptr, FFIType.int32_t],
-    returns: FFIType.ptr,
-  },
-  cv_match_template: {
-    args: [FFIType.ptr, FFIType.ptr, FFIType.int32_t],
-    returns: FFIType.ptr,
-  },
-  cv_release_mat: {
-    args: [FFIType.ptr],
-    returns: FFIType.void,
-  },
-  cv_get_size: {
-    args: [FFIType.ptr, FFIType.ptr, FFIType.ptr],
-    returns: FFIType.void,
-  },
-  cv_get_mat_data: {
-    args: [FFIType.ptr, FFIType.ptr],
-    returns: FFIType.void,
-  },
-}); 
+let symbolsInstance: any = null;
+
+export function getSymbols() {
+  if (!symbolsInstance) {
+    symbolsInstance = dlopen(getLibraryPath(), {
+      cv_imread: {
+        args: [FFIType.ptr, FFIType.int32_t],
+        returns: FFIType.ptr,
+      },
+      cv_match_template: {
+        args: [FFIType.ptr, FFIType.ptr, FFIType.int32_t],
+        returns: FFIType.ptr,
+      },
+      cv_release_mat: {
+        args: [FFIType.ptr],
+        returns: FFIType.void,
+      },
+      cv_get_size: {
+        args: [FFIType.ptr, FFIType.ptr, FFIType.ptr],
+        returns: FFIType.void,
+      },
+      cv_get_mat_data: {
+        args: [FFIType.ptr, FFIType.ptr],
+        returns: FFIType.void,
+      },
+    }).symbols;
+  }
+  return symbolsInstance;
+} 
