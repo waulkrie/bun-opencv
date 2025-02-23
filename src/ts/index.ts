@@ -1,5 +1,6 @@
 export { Mat } from './mat';
 export * from './types';
+export * from './transform_utils';
 import { Mat, symbols } from './mat';
 import {
   LoadImageFlags,
