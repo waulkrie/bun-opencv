@@ -1,3 +1,7 @@
+#include <opencv2/core.hpp>        // For cv::Mat
+#include <opencv2/imgcodecs.hpp>   // For cv::imread
+#include <opencv2/imgproc.hpp>
+#include <opencv2/highgui.hpp>
 #include "vision_utils.h"
 
 // Color conversion wrapper
