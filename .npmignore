@@ -1,8 +1,5 @@
 # Build artifacts
 build/
-*.dll
-*.so
-*.dylib
 
 # Test files
 test/
