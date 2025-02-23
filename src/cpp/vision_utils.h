@@ -1,7 +1,6 @@
 #ifndef VISION_UTILS_HPP
 #define VISION_UTILS_HPP
 
-#include <opencv2/opencv.hpp>
 
 // Generic helper definitions for shared library support
 #if defined _WIN32 || defined __CYGWIN__

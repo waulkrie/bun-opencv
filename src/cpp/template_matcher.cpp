@@ -43,4 +43,14 @@ void cv_get_size(void* mat_ptr, int* width, int* height) {
 void cv_get_mat_data(void* mat_ptr, float* buffer) {
     auto* mat = static_cast<cv::Mat*>(mat_ptr);
     memcpy(buffer, mat->ptr<float>(), mat->rows * mat->cols * sizeof(float));
+}
+
+// Get specific pixel value wrapper
+float cv_get_pixel(void* mat_ptr, int row, int col) {
+    if (!mat_ptr) return 0.0f;
+    auto* mat = static_cast<cv::Mat*>(mat_ptr);
+    if (row < 0 || row >= mat->rows || col < 0 || col >= mat->cols) {
+        return 0.0f;
+    }
+    return mat->at<float>(row, col);
 } 

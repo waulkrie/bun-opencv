@@ -8,6 +8,9 @@ import {
   equalizeHistAsync,
   ColorConversionCodes,
   LoadImageFlags,
+  matchTemplate,
+  TemplateMatchModes,
+  findMatches,
 } from "../src/ts";
 import { join } from 'path';
 const TEST_DIR = join(import.meta.dir);
@@ -16,13 +19,47 @@ describe("Transform Utils", () => {
   it("should convert color to grayscale", async () => {
     const image = await imreadAsync(join(TEST_DIR, "sample.png"), LoadImageFlags.COLOR);
     const gray = await cvtColorAsync(image, ColorConversionCodes.BGR2GRAY);
-    expect(gray).toBeInstanceOf(Mat);
+    // Check specific pixel values that we know should be certain grayscale values
+    // Mario's pixels should be around these values
+    expect(gray.at(0, 0)).toBeCloseTo(0); // Background should be black/very dark
+    expect(gray.rows).toBe(image.rows);
+    expect(gray.cols).toBe(image.cols);
   });
 
   it("should apply gaussian blur", async () => {
+    // First find a good edge using template matching
     const image = await imreadAsync(join(TEST_DIR, "sample.png"), LoadImageFlags.COLOR);
+    const templ = await imreadAsync(join(TEST_DIR, "template.png"), LoadImageFlags.COLOR);
+    
+    const result = await matchTemplate(
+      image,
+      templ,
+      TemplateMatchModes.TM_CCOEFF_NORMED
+    );
+    
+    const matches = await findMatches(result, 0.8);
+    console.log('Template match magnatude:', matches.length);
+    
+    // Use the first match location for our blur test
+    const matchLoc = matches[2]; //sadge
+    const edgeX = matchLoc.x;
+    const edgeY = matchLoc.y;
+    
+    // Now test the blur at our known edge location
     const blurred = await gaussianBlurAsync(image, 5, 1.0);
-    expect(blurred).toBeInstanceOf(Mat);
+    
+    const originalEdgeValue = image.at(edgeY, edgeX);
+    const blurredEdgeValue = blurred.at(edgeY, edgeX);
+    
+    // Edge should be smoothed, so values should be different
+    expect(blurredEdgeValue).not.toBe(originalEdgeValue);
+    expect(Math.abs(blurredEdgeValue - originalEdgeValue)).toBeGreaterThan(5);
+    
+    // Cleanup
+    image.release();
+    templ.release();
+    result.release();
+    blurred.release();
   });
 
   it("should apply threshold", async () => {
@@ -48,13 +85,13 @@ describe("Transform Utils", () => {
     expect(processed).toBeInstanceOf(Mat);
   });
 
-//   it("should handle invalid inputs", async () => {
-//     const invalidMat = new Mat(0);
+  it("should handle invalid inputs", async () => {
+    const invalidMat = new Mat(0n); 
     
-//     await expect(cvtColorAsync(invalidMat, ColorConversionCodes.BGR2GRAY))
-//       .rejects.toThrow();
+    await expect(cvtColorAsync(invalidMat, ColorConversionCodes.BGR2GRAY))
+      .rejects.toThrow();
     
-//     await expect(gaussianBlurAsync(invalidMat))
-//       .rejects.toThrow();
-//   });
+    await expect(gaussianBlurAsync(invalidMat))
+      .rejects.toThrow();
+  });
 }); 

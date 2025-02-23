@@ -31,6 +31,7 @@ API void* cv_match_template(void* image_ptr, void* templ_ptr, int method);
 API void cv_release_mat(void* mat_ptr);
 API void cv_get_size(void* mat_ptr, int* width, int* height);
 API void cv_get_mat_data(void* mat_ptr, float* buffer);
+API float cv_get_pixel(void* mat_ptr, int row, int col) ;
 
 #ifdef __cplusplus
 }
