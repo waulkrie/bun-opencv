@@ -117,18 +117,18 @@ bool cv_is_image_empty(void* img_ptr) {
     return mat->empty();
 }
 
-void cv_show_image(const char* window_name, void* img_ptr) {
-    if (!window_name || !img_ptr) return;
+// void cv_show_image(const char* window_name, void* img_ptr) {
+//     if (!window_name || !img_ptr) return;
     
-    try {
-        auto* mat = static_cast<cv::Mat*>(img_ptr);
-        cv::namedWindow(window_name, cv::WINDOW_AUTOSIZE);
-        cv::imshow(window_name, *mat);
-        cv::waitKey(1);
-    } catch (...) {
-        // Silently fail
-    }
-}
+//     try {
+//         auto* mat = static_cast<cv::Mat*>(img_ptr);
+//         cv::namedWindow(window_name, cv::WINDOW_AUTOSIZE);
+//         cv::imshow(window_name, *mat);
+//         cv::waitKey(1);
+//     } catch (...) {
+//         // Silently fail
+//     }
+// }
 
 // Color space conversions
 void* cv_to_gray(void* src_ptr) {
