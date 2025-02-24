@@ -30,7 +30,6 @@ extern "C" {
 API void* cv_load_image(const char* filename, int flags);
 API bool cv_save_image(const char* filename, void* img_ptr);
 API bool cv_is_image_empty(void* img_ptr);
-// API void cv_show_image(const char* window_name, void* img_ptr);
 
 // Color space conversions
 API void* cv_cvt_color(void* src_ptr, int code);

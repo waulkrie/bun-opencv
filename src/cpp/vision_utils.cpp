@@ -1,5 +1,5 @@
-#include <opencv2/core.hpp>        // For cv::Mat
-#include <opencv2/imgcodecs.hpp>   // For cv::imread
+#include <opencv2/core.hpp>
+#include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 #include "vision_utils.h"
@@ -36,7 +36,7 @@ void* cv_gaussian_blur(void* src_ptr, int kernel_size, double sigma) {
     }
 }
 
-// Threshold wrapper
+// Threshold wrapper, converts mat to greyscale before applying a fixed-level threshold
 void* cv_threshold(void* src_ptr, double thresh, double maxval) {
     if (!src_ptr) return nullptr;
     
@@ -116,19 +116,6 @@ bool cv_is_image_empty(void* img_ptr) {
     auto* mat = static_cast<cv::Mat*>(img_ptr);
     return mat->empty();
 }
-
-// void cv_show_image(const char* window_name, void* img_ptr) {
-//     if (!window_name || !img_ptr) return;
-    
-//     try {
-//         auto* mat = static_cast<cv::Mat*>(img_ptr);
-//         cv::namedWindow(window_name, cv::WINDOW_AUTOSIZE);
-//         cv::imshow(window_name, *mat);
-//         cv::waitKey(1);
-//     } catch (...) {
-//         // Silently fail
-//     }
-// }
 
 // Color space conversions
 void* cv_to_gray(void* src_ptr) {
