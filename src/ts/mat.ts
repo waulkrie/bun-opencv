@@ -7,11 +7,8 @@ function getLibraryPath(): string {
   const platform = process.platform;
   const prefix = platform === 'win32' ? '' : 'lib';
   const libName = `${prefix}template_matcher.${suffix}`;
-
-  const binDir = platform === 'win32' ? 'bin/Release' : 'lib';
-  const buildDir = join(import.meta.dir, '..', '..', 'build', binDir);
-
-  const libPath = join(buildDir, libName);
+  const distDir = join(import.meta.dir, '..', '..', 'dist');
+  const libPath = join(distDir, libName);
   return libPath;
 }
 
